@@ -1,0 +1,99 @@
+@font-face {
+    font-family: 'Montserrat-Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: url(./fonts/Montserrat-Bold.woff) format('woff'); /* For IE6-8 */
+    src: local('Montserrat-Bold'),
+         url(./fonts/Montserrat-Bold.woff2) format('woff2'),
+         url(./fonts/Montserrat-Bold.woff) format('woff'),;
+  }
+  @font-face {
+    font-family: 'Montserrat-ExtraBold';
+    font-style: normal;
+    font-weight: normal;
+    src: url(./fonts/Montserrat-ExtraBold.woff) format('woff'); /* For IE6-8 */
+    src: local('Montserrat-ExtraBold'),
+         url(./fonts/Montserrat-ExtraBold.woff2) format('woff2'),
+         url(./fonts/Montserrat-ExtraBold.eot);
+  }
+  @font-face {
+    font-family: 'Montserrat-Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: url(./fonts/Montserrat-Medium.woff) format('woff'); /* For IE6-8 */
+    src: local('Montserrat-ExtraBold'),
+         url(./fonts/Montserrat-Medium.woff2) format('woff2'),
+         url(./fonts/Montserrat-Medium.eot);
+  }
+  @font-face {
+    font-family: 'Montserrat-MediumItalic';
+    font-style: normal;
+    font-weight: normal;
+    src: url(./fonts/Montserrat-MediumItalic.woff) format('woff'); /* For IE6-8 */
+    src: local('Montserrat-MediumItalic'),
+         url(./fonts/Montserrat-MediumItalic.woff2) format('woff2'),
+         url(./fonts/Montserrat-MediumItalic.eot);
+  }
+  @font-face {
+    font-family: 'Montserrat-SemiBold';
+    font-style: normal;
+    font-weight: normal;
+    src: url(./fonts/Montserrat-SemiBold.woff) format('woff'); /* For IE6-8 */
+    src: local('Montserrat-SemiBold'),
+         url(./fonts/Montserrat-SemiBold.woff2) format('woff2'),
+         url(./fonts/Montserrat-SemiBold.eot);
+  }
+  @font-face {
+    font-family: 'Montserrat-Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: url(./fonts/Montserrat-Regular.woff) format('woff'); /* For IE6-8 */
+    src: local('Montserrat-Regular'),
+         url(./fonts/Montserrat-Regular.woff2) format('woff2'),
+         url(./fonts/Montserrat-Regular.eot);
+  }
+  @font-face {
+    font-family: 'Montserrat-SemiBoldItalic';
+    font-style: normal;
+    font-weight: normal;
+    src: url(./fonts/Montserrat-SemiBoldItalic.woff) format('woff'); /* For IE6-8 */
+    src: local('Montserrat-Regular'),
+         url(./fonts/Montserrat-SemiBoldItalic.woff2) format('woff2'),
+         url(./fonts/Montserrat-SemiBoldItalic.eot);
+  }
+  @font-face {
+    font-family: 'Montserrat-Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: url(./fonts/Montserrat-Italic.woff) format('woff'); /* For IE6-8 */
+    src: local('Montserrat-Regular'),
+         url(./fonts/Montserrat-Italic.woff2) format('woff2'),
+         url(./fonts/Montserrat-Italic.eot);
+  }
+  @font-face {
+    font-family: 'Montserrat-LightItalic';
+    font-style: normal;
+    font-weight: normal;
+    src: url(./fonts/Montserrat-LightItalic.woff) format('woff'); /* For IE6-8 */
+    src: local('Montserrat-ExtraBold'),
+         url(./fonts/Montserrat-LightItalic.woff2) format('woff2'),
+         url(./fonts/Montserrat-LightItalic.eot);
+  }
+  @font-face {
+    font-family: 'Montserrat-Light';
+    font-style: normal;
+    font-weight: normal;
+    src: url(./fonts/Montserrat-Light.woff) format('woff'); /* For IE6-8 */
+    src: local('Montserrat-ExtraBold'),
+         url(./fonts/Montserrat-Light.woff2) format('woff2'),
+         url(./fonts/Montserrat-Light.eot);
+  }
+  @font-face {
+    font-family: 'Montserrat-Black';
+    font-style: normal;
+    font-weight: normal;
+    src: url(./fonts/Montserrat-Black.woff) format('woff'); /* For IE6-8 */
+    src: local('Montserrat-ExtraBold'),
+         url(./fonts/Montserrat-Black.woff2) format('woff2'),
+         url(./fonts/Montserrat-Black.eot);
+  }

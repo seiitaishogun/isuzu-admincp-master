@@ -1,0 +1,97 @@
+<template>
+  <style>
+    ux-dialog-overlay.active {
+      background-color: black;
+      opacity: .5;
+    }
+    .datepicker.dropdown-menu{
+      z-index: 999999!important
+    }
+  </style>
+  <ux-dialog>
+    <ux-dialog-body>
+      <div class="modal-dialog modal-lg">
+        <h2>${getTieuDe}</h2>
+        <!-- <form submit.delegate="save()" enctype="multipart/form-data"> -->
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="row  m-b-15">
+                    <div class="col-md-4  name m-t-5">Tên hợp đồng<span class="text-danger">(*)</span> : </div>
+                    <div class="col-md-8 value">
+                      <input type="text" class="form-control" value.bind="HopDongDto.ten  & validate" focus="true">
+                    </div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="row  m-b-15">
+                      <div class="col-md-4  name m-t-5">Số hợp đồng<span class="text-danger">(*)</span> : </div>
+                      <div class="col-md-8 value">
+                          <input type="text" class="input-sm form-control" value.bind="HopDongDto.soHopDong">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="row  m-b-15">
+                      <div class="col-md-4  name m-t-5">Ngày ký hợp đồng<span class="text-danger">(*)</span> : </div>
+                      <div class="col-md-8 value">
+                          <input type="text" class="input-sm form-control" value.bind="HopDongDto.ngayKy | dateFormat" datepicker >
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="row  m-b-15">
+                    <div class="col-md-4  name m-t-5">Ngày hiệu lực : </div>
+                    <div class="col-md-8 value">
+                      <input type="text"  class="input-sm form-control"  value.bind="HopDongDto.ngayHieuLuc | dateFormat " datepicker>
+                    </div>
+                  </div>
+              </div>
+
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="row  m-b-15">
+                      <div class="col-md-4  name m-t-5">Ngày hết hiệu lực : </div>
+                      <div class="col-md-8 value">
+                        <input type="text"  class="input-sm form-control"  value.bind="HopDongDto.ngayHetHieuLuc | dateFormat " datepicker>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-md-6">
+                  <div class="row  m-b-15">
+                    <div class="col-md-4  name m-t-5 fa fa-upload">Upload hợp đồng : </div>
+                    <div class="col-md-8 value">
+                      <uploader  if.bind="HopDongDto.showInputUpload" value.bind="HopDongDto.fileHopDong" uri="${uploadLink}" accept=".doc,.docx,.pdf"></uploader>
+                    </div>
+                    <div class="col-md-8 value" if.bind="!HopDongDto.showInputUpload">
+                      <label class="m-t-5">${getName(HopDongDto.fileHopDong)}</label><button class="btn btn-primary" click.delegate="deleteFileHopDong()"><i class="fa fa-close"></i>Delete</button>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="row  m-b-15">
+                      <div class="col-md-4  name m-t-5">Ghi chú hợp đồng : </div>
+                      <div class="col-md-8 value">
+                        <textarea type="text"  class="input-sm form-control"  value.bind="HopDongDto.ghiChu "> </textarea>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-md-6">
+              </div>
+          </div>
+          <br>
+          <div class="row pull-right">
+            <button class="btn btn-primary" click.delegate="save()">Lưu</button>
+            <button class="btn btn-warning" click.trigger="dialogcontroller.cancel()">Hủy</button>
+          </div>
+        <!-- </form> -->
+      </div>
+    </ux-dialog-body>
+  </ux-dialog>
+</template>

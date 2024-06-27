@@ -1,0 +1,297 @@
+<template>
+  <style>
+    ux-dialog-overlay.active {
+      background-color: black;
+      opacity: .5;
+    }
+
+    .datepicker.dropdown-menu {
+      z-index: 999999 !important
+    }
+
+    @media (min-width: 992px) {
+      .modal-lg {
+        width: 1080px;
+      }
+
+      .modal-dialog {
+        margin: 0px auto;
+      }
+
+      .modal-header {
+        border-bottom-width: 0px;
+      }
+    }
+
+    span:focus,
+    button:focus {
+      outline: none !important;
+      border-color: #43b5e2 !important;
+      box-shadow: 0 0 10px #43b5e2 !important;
+    }
+
+    input[type=radio]:focus+label::before {
+      outline: none !important;
+      border-color: #43b5e2 !important;
+      box-shadow: 0 0 10px #43b5e2 !important;
+    }
+
+    input[type=checkbox]:focus+label::before {
+      outline: none !important;
+      border-color: #43b5e2 !important;
+      box-shadow: 0 0 10px #43b5e2 !important;
+    }
+
+    input,
+    textarea,
+    select+span {
+      font-weight: bold !important;
+    }
+  </style>
+  <ux-dialog>
+    <ux-dialog-body>
+      <div class="modal-dialog modal-lg">
+        <div class="clearfix text-left">
+          <button click.delegate="dialogcontroller.cancel()" type="button" class="close">
+            <i class="pg-close fs-22"></i>
+          </button>
+          <h5>${getTieuDe}
+            <span class="semi-bold">Dealer</span>
+          </h5>
+        </div>
+
+        <form class="desModalForm" name="myform">
+            <div class="row">
+                <div class="col-sm-12">
+                  <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                              <div class="row  m-b-15">
+                                <div class="col-md-4  name m-t-5">Language </div>
+                                <div class="col-md-8 value">
+                                    <select class="form-control long" value.bind="item.language" change.trigger="changeLang()" >
+                                        <option value="">--Chọn--</option>
+                                        <option value="en">English</option>
+                                        <option value="vn">Tiếng Việt</option>
+                                    </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row  m-b-15">
+                                  <div class="col-md-4  name m-t-5">Status </div>
+                                  <div class="col-md-8 value">
+                                      <select class="form-control long" value.bind="item.postStatus" >
+                                          <option value="">--Chọn--</option>
+                                          <option value="publish">Publish</option>
+                                          <option value="private">Private</option>
+                                      </select>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row  m-b-15">
+                                  <div class="col-md-4  name m-t-5">Dealer:</div>
+                                  <div class="col-md-8 value">
+                                    <input type="text" class="form-control " name="" value.bind="item.postTitle & validate"
+                                      >
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="row  m-b-15">
+                                      <div class="col-md-4  name m-t-5">Website </div>
+                                      <div class="col-md-8 value">
+                                          <input type="text" class="form-control " name=""
+                                          value.bind="item.website & validate">
+                                      </div>
+                                    </div>
+                              </div>
+                        </div>
+                      <div class="row">
+                          <div class="col-md-6">
+                            <div class="row  m-b-15">
+                              <div class="col-md-4  name m-t-5"> Type:</div>
+                              <div class="col-md-8 value">
+                                <!-- <input type="text" class="form-control " name="" value.bind="item.dealer_type & validate"> -->
+                                <select class="form-control " value.bind="item.dealer_type  & validate" >
+                                    <option value="">--Chọn--</option>
+                                    <option value="itrucks">itrucks</option>
+                                    <option value="dsquare">dsquare</option>
+                                  </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="row  m-b-15">
+                              <div class="col-md-4  name m-t-5">City: </div>
+                              <div class="col-md-8 value">
+                                <!-- <input type="text" class="form-control " name="" value.bind="item.region & validate"> -->
+                                  <!-- <select class="form-control " value.bind="item.region  & validate" >
+                                      <option value="">--Chọn--</option>
+                                      <option value="BẮC/NORTH">BẮC/NORTH</option>
+                                      <option value="TRUNG/CENTRAL">TRUNG/CENTRAL</option>
+                                      <option value="NAM/SOUTH">NAM/SOUTH</option>
+                                      <option value="TÂY/MEKONG DELTA">TÂY/MEKONG DELTA</option>
+                                      
+                                    </select> -->
+                                    <select class="form-control" value.bind="city" >
+                                        <option value="">--Chọn--</option>
+                                        <optgroup repeat.for="parent of dealerAreaCategories_parent" label.bind="parent.name">
+                                          <option repeat.for="it of getChild(parent)" value.bind="it.name">${it.name}</option>
+                                        </optgroup>
+                                      </select>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="row  m-b-15">
+                            <div class="col-md-4  name m-t-5">Latitude:</div>
+                            <div class="col-md-8 value">
+                              <input type="number" class="form-control " name="" value.bind="item.lat & validate"
+                                >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row  m-b-15">
+                              <div class="col-md-4  name m-t-5">Longtitue</div>
+                              <div class="col-md-8 value">
+                                <input type="number" class="form-control " name=""
+                                  value.bind="item.long & validate">
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="row  m-b-15">
+                            <div class="col-md-4  name m-t-5">Hotline Sale </div>
+                            <div class="col-md-8 value">
+                              <input type="text" class="form-control " name=""
+                                value.bind="item.hotline_sales & validate">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row  m-b-15">
+                              <div class="col-md-4  name m-t-5"> Hotline Warranty </div>
+                              <div class="col-md-8 value">
+                                <input type="text" class="form-control " name=""
+                                  value.bind="item.hotline_warranty & validate">
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        
+                          <div class="col-md-6">
+                              <div class="row  m-b-15">
+                                  <div class="col-md-4  name m-t-5">Address </div>
+                                  <div class="col-md-8 value">
+                                      <input type="text" class="form-control " name=""
+                                      value.bind="item.address & validate">
+                                  </div>
+                                </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="row  m-b-15">
+                                <div class="col-md-4  name m-t-5">Email </div>
+                                <div class="col-md-8 value">
+                                    <input type="text" class="form-control " name=""
+                                    value.bind="item.email & validate">
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                     
+                    
+                      <!-- <div class="row">
+                        <div class="col-md-6">
+                          <div class="row  m-b-15">
+                            <div class="col-md-4  name m-t-5">City (en) </div>
+                            <div class="col-md-8 value">
+                                <input type="text" class="form-control " name=""
+                                value.bind="item.city_en & validate">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row  m-b-15">
+                                <div class="col-md-4  name m-t-5">City (vi) </div>
+                                <div class="col-md-8 value">
+                                    <input type="text" class="form-control " name=""
+                                    value.bind="item.city_vn & validate">
+                                </div>
+                              </div>
+                        </div>
+                      </div> -->
+                    
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="row  m-b-15">
+                            <div class="col-md-4  name m-t-5">Region</div>
+                            <div class="col-md-8 value">
+                                <input type="text" class="form-control " name=""
+                                value.bind="item.region">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="row  m-b-15">
+                            <div class="col-md-4  name m-t-5">Region (en)</div>
+                            <div class="col-md-8 value">
+                                <input type="text" class="form-control " name=""
+                                value.bind="item.region_en">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row  m-b-15">
+                                <div class="col-md-4  name m-t-5">Region (vn)</div>
+                                <div class="col-md-8 value">
+                                    <input type="text" class="form-control " name=""
+                                    value.bind="item.region_vn">
+                                </div>
+                              </div>
+                        </div>
+                      </div>
+                      
+
+
+                    </div>
+                  </div>
+
+
+
+
+                </div>
+              </div>
+
+       
+          <div class="row pull-right">
+
+              <button click.delegate="dialogcontroller.cancel()" type="button" class="btn btn-danger m-t-5"
+              data-dismiss="modal">
+              <i class="fa fa-close"></i> Đóng</button>
+            <button click.delegate="save()" type="submit" class="btn btn-primary  m-t-5">
+              <i class="fa fa-check"></i>Save</button>
+
+          </div>
+        </form>
+      </div>
+    </ux-dialog-body>
+  </ux-dialog>
+ 
+  
+
+</template>

@@ -1,0 +1,129 @@
+<template>
+  <style>
+    ux-dialog-overlay.active {
+      background-color: black;
+      opacity: .5;
+    }
+
+    .datepicker.dropdown-menu {
+      z-index: 999999 !important
+    }
+
+    @media (min-width: 992px) {
+      .modal-lg {
+        width: 1080px;
+      }
+
+      .modal-dialog {
+        margin: 0px auto;
+      }
+
+      .modal-header {
+        border-bottom-width: 0px;
+      }
+    }
+
+    span:focus,
+    button:focus {
+      outline: none !important;
+      border-color: #43b5e2 !important;
+      box-shadow: 0 0 10px #43b5e2 !important;
+    }
+
+    input[type=radio]:focus+label::before {
+      outline: none !important;
+      border-color: #43b5e2 !important;
+      box-shadow: 0 0 10px #43b5e2 !important;
+    }
+
+    input[type=checkbox]:focus+label::before {
+      outline: none !important;
+      border-color: #43b5e2 !important;
+      box-shadow: 0 0 10px #43b5e2 !important;
+    }
+
+    input,
+    textarea,
+    select+span {
+      font-weight: bold !important;
+    }
+  </style>
+  <ux-dialog>
+    <ux-dialog-body>
+      <div class="modal-dialog modal-lg">
+        <div class="clearfix text-left">
+          <button click.delegate="dialogcontroller.cancel()" type="button" class="close">
+            <i class="pg-close fs-22"></i>
+          </button>
+          <h5>${getTitle}
+            <span class="semi-bold">Thông báo</span>
+          </h5>
+        </div>
+
+        <form class="desModalForm" name="myform">
+          <div class="row">
+
+            <div class="col-sm-12">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="row  m-b-15">
+                        <div class="col-md-4  name m-t-5">Số điện thoại: </div>
+                        <div class="col-md-8 value">
+                          <input type="text" class="form-control" name="" value.bind="item.phoneNumber">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br><br>
+
+                  <div class="row">
+                    <div class="col-md-2 name m-t-5">Nhập tiêu đề : </div>
+                    <div class="col-md-6 value">
+                      <input type="text" class="form-control" value.bind="item.title">
+                    </div>
+                  </div>
+
+                  <br>
+                  
+                  <div class="row">
+                    <div class="col-md-2 name m-t-5">Category : </div>
+                    <div class="col-md-6 value">
+                      <input type="text" class="form-control" value.bind="item.category">
+                    </div>
+                  </div>
+
+                  <br>
+
+                  <div class="row">
+                    <div class="col-md-2 name m-t-5">Nhập nội dung : </div>
+                    <div class="col-md-6 value">
+                      <textarea style="width:533px" name="" id="" cols="30" value.bind="item.content"
+                        rows="10"></textarea>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row pull-left">
+            <button class="btn btn-danger" click.trigger="dialogcontroller.cancel()">Đóng</button>
+          </div>
+
+          <div class="row pull-right">
+            <button class="btn btn-primary" click.trigger="sendNotification(item)">Gửi Notification</button>
+
+          </div>
+
+        </form>
+      </div>
+    </ux-dialog-body>
+  </ux-dialog>
+
+
+
+</template>

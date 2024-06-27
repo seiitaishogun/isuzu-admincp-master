@@ -1,0 +1,81 @@
+<template>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <div lpformnum="2" class="form-filter">
+             
+                <div class="form-group">
+                  <label>Type</label>
+                  <input type="text" class="form-control input-sm" value.bind="filter.where.type.regexp" enter-press.call="runFilter()" placeholder="">
+                </div>
+                <div class="form-group">
+                  <label>Status</label>
+                  <input type="text" class="form-control input-sm" value.bind="filter.where.status.regexp" enter-press.call="runFilter()" placeholder="">
+                </div>
+                <div class="form-group">
+                  <button data-loading-text="Loading" btn-async="task.call:runFilter()" class="btn btn-primary btn-cons btn-sm m-t-25" type="submit"><i class="fa fa-search"></i> Search</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <button  click.delegate="runCreate()" class="btn btn-primary btn-sm m-b-10  m-t-5" data-toggle="modal"><i class="fa fa-plus-circle"></i> Add </button>
+              <loader async-task.bind="asyncTask">
+                <table class="table table-hover" aurelia-table="data.bind: items; display-data.bind: $displayData; ">
+                  <thead>
+                    <tr>
+                      <th class="col-md-1">STT</th>
+                      <th class="col-md-3">Type</th>
+                      <th class="col-md-4">Images</th>
+                      <th class="col-md-2">Status</th>
+                  
+                      <th class="col-md-2" >Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr  repeat.for="item of $displayData">
+                      <td class="v-align-middle col-md-1">${$index+1}</td>
+                      <td class="v-align-middle">${item.type}</td>
+                      <td class="v-align-middle"> <img style="margin:0;"  width="150px " height="auto"
+                        src="${item.image || image_default}" alt=" "></td>
+                      <td class="v-align-middle">${item.status}</td>
+                     
+                      <td class="v-align-middle" >
+                        <div class="btn-group">
+                          <button class="btn btn-warning btn-sm" click.delegate="runUpdate(item)"><i class="fa fa-edit"></i> Edit</button>
+                          <button class="btn btn-danger btn-sm" click.delegate="runDelete(item.id)"><i class="fa fa-trash-o"></i> Delete</button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="row">
+                  <div class="col-md-8">
+                    <aut-pagination filter-ref.bind="filter" changed.delegate="paginationChanged($event)" current-page.bind="currentPage" page-size.bind="pageSize"
+                      total-items.bind="itemsCount" pagination-size.bind="10">
+                    </aut-pagination>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-inline">
+                      <div class="form-group pull-right">
+                        <label for="pageSize">Page Size: </label>
+                        <select value.bind="pageSize" id="pageSize" class="form-control">
+                          <option model.bind="5">5</option>
+                          <option selected model.bind="10">10</option>
+                          <option model.bind="20">20</option>
+                          <option model.bind="50">50</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </loader>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

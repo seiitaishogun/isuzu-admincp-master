@@ -1,0 +1,98 @@
+<template>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <div lpformnum="2" class="form-filter">
+             
+                <table>
+                  <tr>
+                   
+                    <td class="form-group long style_float style_width_td">
+                      <label class="style_float" for="">name</label>
+                      <input type="text" class="form-control input-sm style_float" value.bind="filter.where.name.regexp"
+                        enter-press.call="runFilter()" placeholder="">
+      
+                    </td>
+                    <td class="form-group long style_float style_width_td">
+                      <label class="style_float" for="">phone</label>
+                      <input type="text" class="form-control input-sm style_float" value.bind="filter.where.phone.regexp"
+                        enter-press.call="runFilter()" placeholder="">
+      
+                    </td>
+                    <td class="form-group long style_float style_width_td">
+                      <label class="style_float" for="">address</label>
+                      <input type="text" class="form-control input-sm style_float" value.bind="filter.where.address.regexp"
+                        enter-press.call="runFilter()" placeholder="">
+      
+                    </td>
+      
+                  </tr>
+                </table>
+                <button data-loading-text="Loading" btn-async="task.call:runFilter()"
+                  class="btn btn-primary btn-cons btn-sm m-t-25" type="submit">
+                  <i class="fa fa-search"></i> Search</button>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <!-- <button  click.delegate="runCreate()" class="btn btn-primary btn-sm m-b-10  m-t-5" data-toggle="modal"><i class="fa fa-plus-circle"></i> Add </button> -->
+              <loader async-task.bind="asyncTask">
+                <table class="table table-hover" aurelia-table="data.bind: items; display-data.bind: $displayData; ">
+                  <thead>
+                    <tr>
+                      <th>STT</th>
+                      <th>id</th>
+                      <th>Name</th>
+                      <th>Phone</th>
+                      <th>Address</th>
+                      <th>Range</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr  repeat.for="item of $displayData">
+                      <td class="v-align-middle">${$index+1}</td>
+                      <td class="v-align-middle">${item.id}</td>
+                      <td class="v-align-middle">${item.name}</td>
+                      <td class="v-align-middle">${item.phone}</td>
+                      <td class="v-align-middle">${item.address}</td>
+                      <td class="v-align-middle">${item.rangeId}</td>
+                      <td class="v-align-middle">
+                        <div class="btn-group">
+                          <button class="btn btn-warning btn-sm" click.delegate="runUpdate(item)"><i class="fa fa-edit"></i> Edit</button>
+                          <button class="btn btn-danger btn-sm" click.delegate="runDelete(item.id)"><i class="fa fa-trash-o"></i> Delete</button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="row">
+                  <div class="col-md-8">
+                    <aut-pagination filter-ref.bind="filter" changed.delegate="paginationChanged($event)" current-page.bind="currentPage" page-size.bind="pageSize"
+                      total-items.bind="itemsCount" pagination-size.bind="10">
+                    </aut-pagination>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-inline">
+                      <div class="form-group pull-right">
+                        <label for="pageSize">Page Size: </label>
+                        <select value.bind="pageSize" id="pageSize" class="form-control">
+                          <option model.bind="5">5</option>
+                          <option selected model.bind="10">10</option>
+                          <option model.bind="20">20</option>
+                          <option model.bind="50">50</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </loader>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,49 @@
+<template>
+  <div class="container-fluid container-fixed-lg">
+    <div class="inner">
+      <h2>Dashboard</h2>
+    
+      <h3>date range example</h3>
+      <div class="input-daterange input-group" daterangepickter >
+        <input type="text" class="input-sm form-control" name="start" value.bind="d.start" datepicker>
+        <span class="input-group-addon">to</span>
+        <input type="text" class="input-sm form-control" name="end" value.bind="d.end" datepicker>
+      </div>
+      binding : ${d.start} - ${d.end}
+      <hr>
+      <h3>Obserable object example</h3>
+      <input type="text"  class = "form-control" value.bind="person.fn">
+      <input class="form-control" value.bind="person.ln"> 
+      <button class="btn btn-primary" disabled.bind="isDisable">ok</button>
+      <hr>
+      <h3> Async action example </h3>
+      <button data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Loading" btn-async="task.call:doClick()" class="btn btn-primary">Click Me</button>
+      
+      <hr>
+      <h3>jstree</h3>
+      Xem document <a href="https://www.jstree.com/"> jstree</a>
+      
+      <div id="data"></div>
+
+      <h3>select2</h3>
+
+      <select select2>
+        <option value="">AAA</option>
+        <option value="">AAA</option>
+        <option value="">AAA</option>
+      </select> 
+      ${selectedValue}
+    </div>
+     <h3>editor</h3>
+     ${ckEditorValue}
+     <textarea ckeditor value.bind="ckEditorValue"></textarea>
+
+    <!--<select name="" id="" select2 class="form-control">
+    <option value="1">1</option>
+  </select>
+  ${vl}
+  <input type="text" datetime-picker class="form-control" value.bind="vl" >
+  </div>-->
+    <!-- END PAGE CONTENT -->
+
+</template>

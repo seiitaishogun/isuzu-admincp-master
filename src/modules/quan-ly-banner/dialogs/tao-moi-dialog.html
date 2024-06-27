@@ -1,0 +1,142 @@
+<template>
+  <style>
+    ux-dialog-overlay.active {
+      background-color: black;
+      opacity: .5;
+    }
+
+    .datepicker.dropdown-menu {
+      z-index: 999999 !important
+    }
+
+    @media (min-width: 992px) {
+      .modal-lg {
+        width: 1080px;
+      }
+
+      .modal-dialog {
+        margin: 0px auto;
+      }
+
+      .modal-header {
+        border-bottom-width: 0px;
+      }
+    }
+
+    span:focus,
+    button:focus {
+      outline: none !important;
+      border-color: #43b5e2 !important;
+      box-shadow: 0 0 10px #43b5e2 !important;
+    }
+
+    input[type=radio]:focus+label::before {
+      outline: none !important;
+      border-color: #43b5e2 !important;
+      box-shadow: 0 0 10px #43b5e2 !important;
+    }
+
+    input[type=checkbox]:focus+label::before {
+      outline: none !important;
+      border-color: #43b5e2 !important;
+      box-shadow: 0 0 10px #43b5e2 !important;
+    }
+
+    input,
+    textarea,
+    select+span {
+      font-weight: bold !important;
+    }
+    .tieude{
+      font-weight: bold;
+      font-size: 15px;
+      padding-top: 5px;
+    }
+  </style>
+  <ux-dialog>
+    <ux-dialog-body>
+      <div class="modal-dialog modal-lg">
+        <div class="clearfix text-left">
+          <button click.delegate="dialogcontroller.cancel()" type="button" class="close">
+            <i class="pg-close fs-22"></i>
+          </button>
+          <h5>${getTieuDe}
+            <span class="semi-bold">Barcode</span>
+          </h5>
+        </div>
+
+        <form class="desModalForm" name="myform">
+            <div class="row">
+                <div class="col-sm-12">
+                  <div class="row">
+                    <div class="col-sm-12">
+                     
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div>
+                            <label class="tieude">Ảnh banner</label>
+                          </div>
+                          <div style="position: relative;">
+                            <uploader value.bind="item.image" uri="${uploadLink}" accept=".jpg, .png"
+                              class="gt_upload1 upload_dichvu"></uploader>
+                            <img style="margin:0;" class="ip bo"  height="auto"
+                              src="${item.image || image_default}" alt=" ">
+                          </div>
+                        <div>
+                        </div>
+                       
+                      </div>
+                      <div class="row">
+                        <div class="form-group">
+                          <h6 class="tieude">Loại type</h6>
+                          <select class="form-control long" value.bind="item.type" >
+                            <option value="">--Chọn--</option>
+                            <option value="all">All</option>
+                            <option value="truck">Truck</option>
+                            <option value="pickup_suv">Pickup/SUV</option>
+                            
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group">
+                          <h6 class="tieude">Loại trạng thái</h6>
+                          <select class="form-control long" value.bind="item.status" >
+                            <option value="">--Chọn--</option>
+                            <option value="Active">Active</option>
+                            <option value="Disable">Disable</option>
+                           
+                            
+                          </select>
+                        </div>
+                      
+                      </div>
+                     
+
+
+                    </div>
+                  </div>
+
+
+
+
+                </div>
+              </div>
+
+          <div class="row pull-left">
+            <button class="btn btn-danger" click.trigger="dialogcontroller.cancel()">Đóng</button>
+          </div>
+          <div class="row pull-right">
+
+            <button class="btn btn-primary" click.trigger="runUpdate(item)" show.bind="item.id">Lưu</button>
+            <button class="btn btn-primary" click.trigger="runCreate(item)" show.bind="!item.id">Tạo mới</button>
+
+          </div>
+        </form>
+      </div>
+    </ux-dialog-body>
+  </ux-dialog>
+ 
+  
+
+</template>

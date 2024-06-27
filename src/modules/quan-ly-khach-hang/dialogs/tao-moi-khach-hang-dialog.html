@@ -1,0 +1,151 @@
+<template>
+  <style>
+    ux-dialog-overlay.active {
+      background-color: black;
+      opacity: .5;
+    }
+  </style>
+  <ux-dialog>
+    <ux-dialog-body>
+      <div class="modal-dialog modal-lg">
+        <h2>${getTieuDe}</h2>
+        <form submit.delegate="save()">
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="row  m-b-15">
+                    <div class="col-md-4  name m-t-5">Mã khách hàng : </div>
+                    <div class="col-md-8 value form-group form-group-default required select2-small">
+                      <input type="text" class="form-control"  name="" value.bind="khachhangDto.ma & validate" focus="true">
+                    </div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="row  m-b-15">
+                      <div class="col-md-4  name m-t-5">Tên khách hàng : </div>
+                      <div class="col-md-8 value form-group form-group-default required select2-small">
+                          <input type="text" class="form-control"  name="" value.bind="khachhangDto.hoTen & validate">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+                <div class="row  m-b-15">
+                  <div class="col-md-4  name m-t-5">Tên tài khoản đăng nhập: </div>
+                  <div class="col-md-8 value">
+                    <input type="text" class="form-control" value.bind="khachhangDto.tenTaiKhoan">
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row  m-b-15">
+                  <div class="col-md-4  name m-t-5">Password: </div>
+                  <div class="col-md-8 value">
+                    <input type="password" class="form-control" value.bind="khachhangDto.matMaTaiKhoan">
+                  </div>
+                </div>
+            </div>
+           
+        </div>
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="row  m-b-15">
+                    <div class="col-md-4  name m-t-5">Địa chỉ : </div>
+                    <div class="col-md-8 value">
+                      <textarea type="text" class="form-control" value.bind="khachhangDto.diaChi"> </textarea>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="row  m-b-15">
+                      <div class="col-md-4  name m-t-5">Email : </div>
+                      <div class="col-md-8 value">
+                          <input type="text" class="form-control"  name="" value.bind="khachhangDto.email">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="row  m-b-15">
+                      <div class="col-md-4  name m-t-5">Fax : </div>
+                      <div class="col-md-8 value">
+                          <input type="text" class="form-control" value.bind="khachhangDto.fax">
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="row  m-b-15">
+                      <div class="col-md-4  name m-t-5">Số điện thoại : </div>
+                      <div class="col-md-8 value">
+                          <input type="text" class="form-control" value.bind="khachhangDto.soDienThoai">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="row  m-b-15">
+                      <div class="col-md-4  name m-t-5">Tài khoản số : </div>
+                      <div class="col-md-8 value">
+                          <input type="text" class="form-control" value.bind="khachhangDto.soTaiKhoan">
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="row  m-b-15">
+                      <div class="col-md-4  name m-t-5">Tại ngân hàng : </div>
+                      <div class="col-md-8 value">
+                        <input type="text" class="form-control" value.bind="khachhangDto.taiNganHang">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="row  m-b-15">
+                      <div class="col-md-4  name m-t-5">Mã số thuế : </div>
+                      <div class="col-md-8 value">
+                          <input type="text" class="form-control" value.bind="khachhangDto.maSoThue">
+                      </div>
+                  </div>
+              </div>
+              <!-- <div class="col-md-6">
+                  <div class="row  m-b-15">
+                      <div class="col-md-4  name m-t-5">Số hợp đồng : </div>
+                      <div class="col-md-8 value">
+                        <input type="text" class="form-control" value.bind="khachhangDto.soHopDong">
+                      </div>
+                  </div>
+              </div> -->
+              <div class="col-md-6">
+                  <div class="row  m-b-15">
+                      <div class="col-md-4  name m-t-5">Ghi chú : </div>
+                      <div class="col-md-8 value">
+                          <textarea type="text" class="form-control" value.bind="khachhangDto.ghiChu"></textarea>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="row  m-b-15">
+                    <div class="col-md-4  name m-t-5">Short Name : </div>
+                    <div class="col-md-8 value">
+                      <input type="text" class="form-control" value.bind="khachhangDto.shortname">
+                    </div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+              </div>
+          </div>
+        
+          <div class="row pull-right">
+            <button class="btn btn-primary" type="submit">Lưu</button>
+            <button class="btn btn-warning" click.trigger="dialogcontroller.cancel()">Hủy</button>
+          </div>
+        </form>
+      </div>
+    </ux-dialog-body>
+  </ux-dialog>
+</template>

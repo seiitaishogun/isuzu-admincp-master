@@ -1,0 +1,109 @@
+<template>
+  <style>
+    ux-dialog-overlay.active {
+      background-color: black;
+      opacity: .5;
+    }
+    @media (min-width: 992px) {
+      .modal-lg {
+          width: 1080px;
+      }
+      .modal-dialog{
+          margin: 0px auto;
+          overflow: hidden
+      }
+      .modal-header{
+          border-bottom-width: 0px;
+      }
+    }
+  </style>
+  <ux-dialog>
+    <ux-dialog-body>
+      <div class="modal-dialog modal-lg">
+        <h2>  Siêu thị</h2>
+        <!-- <form submit.delegate="save()"> -->
+            <div class="panel-body">
+            <button click.delegate="runCreate()" class="btn btn-warning btn-sm m-b-10  m-t-5" data-toggle="modal"><i class="fa fa-file"></i> Tạo mới</button>
+            <div class="row">
+              <div class="col-sm-12">
+                <div lpformnum="2" class="form-filter">
+                  <div class="form-group">
+                    <label>Tên siêu thị</label>
+                    <span class="help">e.g. </span>
+                    <input type="text" class="form-control input-sm" value.bind="filter.where.ten.ilike" enter-press.call="runFilter()" focus="true">
+                  </div>
+                  <div class="form-group">
+                    <label>địa chỉ</label>
+                    <span class="help">e.g. </span>
+                      <select class="form-control" value.bind="hieuLucControlSelected">
+                        <option value="-1">--Chon--</option>
+                        <option value="1">Còn hiệu lực</option>
+                        <option value="2">hết hiệu lực</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                    <button data-loading-text="Loading" btn-async="task.call:runFilter()" class="btn btn-primary btn-cons btn-sm m-t-25" type="submit"><i class="fa fa-search"></i> Search</button>
+                  </div>
+                </div>
+                <!-- </form> -->
+              </div>
+              <div class="col-sm-12">
+                <loader async-task.bind="asyncTask">
+                  <table class="table table-hover" aurelia-table="data.bind: items; display-data.bind: $displayData; ">
+                    <thead>
+                      <tr>
+                        <th>STT</th>
+                        <th>Tên siêu thị</th>
+                        <th>Địa chỉ</th>
+                        <th>Số điện thoại</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr repeat.for="item of [1,2,3]">
+                        <td class="v-align-middle">${$index + 1}</td>
+                        <td class="v-align-middle">Big C chi nhánh ${$index + 1}</td>
+                        <td class="v-align-middle">Địa chỉ chi nhánh ${$index + 1}</td>
+                        <td class="v-align-middle">SĐT chi nhánh ${$index + 1}</td>
+                        <td class="v-align-middle">
+                          <div>
+                            <button class="btn btn-warning btn-sm" click.delegate="runUpdate(item)"><i class="fa fa-edit"></i> Edit</button>
+                            <!-- <button type="button" class="btn btn-default btn-sm text-danger" click.delegate="runDelete(item)"><i class="fa fa-trash-o"></i> Delete</button> -->
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="row">
+                    <div class="col-md-8">
+                      <aut-pagination filter-ref.bind="filter" changed.delegate="paginationChanged($event)" current-page.bind="currentPage" page-size.bind="pageSize"
+                        total-items.bind="itemsCount" pagination-size.bind="pageSize">
+                      </aut-pagination>
+                    </div>
+                    <div class="col-md-4">
+                       <div class="form-inline">
+                        <div class="form-group pull-right">
+                          <label for="pageSize">Page Size: </label>
+                          <select value.bind="pageSize" id="pageSize" class="form-control">
+                            <option model.bind="5">5</option>
+                            <option selected model.bind="10">10</option>
+                            <option model.bind="20">20</option>
+                            <option model.bind="50">50</option>
+                          </select>
+                        </div>
+                      </div> 
+                    </div>
+                  </div>
+                </loader>
+              </div>
+            </div>
+          </div>
+          <div style="text-align: right">
+            <!-- <button class="btn btn-primary" type="submit">Lưu</button> -->
+            <button class="btn btn-warning" click.trigger="dialogcontroller.cancel()">Đóng</button>
+          </div>
+        <!-- </form> -->
+      </div>
+    </ux-dialog-body>
+  </ux-dialog>
+</template>

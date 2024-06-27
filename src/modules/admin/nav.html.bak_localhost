@@ -1,0 +1,115 @@
+<template>
+  <div class="page-sidebar" data-pages="sidebar">
+    <div id="appMenu" class="sidebar-overlay-slide from-top">
+    </div>
+    <!-- BEGIN SIDEBAR HEADER -->
+    <div class="sidebar-header">
+      <img src="http://isuzu-vietnam.com/assets/images/logo.png" alt="logo" class="brand" data-src="http://isuzu-vietnam.com/assets/images/logo.png" data-src-retina="http://isuzu-vietnam.com/assets/images/logo.png">
+      <div class="sidebar-header-controls">
+        <!--<button data-pages-toggle="#appMenu" class="btn btn-xs sidebar-slide-toggle btn-link m-l-20" type="button"><i class="fa fa-angle-down fs-16"></i>
+          </button>-->
+        <button data-toggle-pin="sidebar" class="btn btn-link visible-lg-inline" type="button"><i class="fa fs-12"></i>
+        </button>
+      </div>
+    </div>
+    <!-- END SIDEBAR HEADER -->
+    <!-- BEGIN SIDEBAR MENU -->
+    <div class="sidebar-menu">
+      <ul class="menu-items">
+          <!-- <li class="">
+              <a href="/#/admin/man-hinh-chinh">
+                  <span class="title">Màn hình chính</span>
+              </a>
+              <span class="icon-thumbnail "><i class="fa fa-users"></i></span>
+          </li>
+          <li class="">
+              <a href="/#/admin/quan-ly-khach-hang">
+                  <span class="title">Khách Hàng</span>
+              </a>
+              <span class="icon-thumbnail "><i class="fa fa-users"></i></span>
+          </li> -->
+          <li class="">
+              <a href="/#/admin/quan-ly-dai-ly">
+                  <span class="title">DEALER</span>
+              </a>
+              <span class="icon-thumbnail "><i class="fa fa-users"></i></span>
+          </li>
+          <li class="">
+            <a href="/#/admin/quan-ly-banner">
+                <span class="title">BANNER</span>
+            </a>
+            <span class="icon-thumbnail "><i class="fa fa-users"></i></span>
+        </li>
+          <li class="">
+              <a href="/#/admin/quan-ly-lcv">
+                  <span class="title">LCV</span>
+              </a>
+              <span class="icon-thumbnail "><i class="fa fa-users"></i></span>
+          </li>
+          <li class="">
+              <a href="/#/admin/quan-ly-truck">
+                  <span class="title">TRUCK</span>
+              </a>
+              <span class="icon-thumbnail "><i class="fa fa-users"></i></span>
+          </li>
+          <li class="">
+              <a href="/#/admin/quan-ly-spv">
+                  <span class="title">SPV</span>
+              </a>
+              <span class="icon-thumbnail "><i class="fa fa-users"></i></span>
+          </li>
+          <li class="">
+              <a href="/#/admin/quan-ly-news">
+                  <span class="title">NEWS</span>
+              </a>
+              <span class="icon-thumbnail "><i class="fa fa-users"></i></span>
+          </li>
+          <li class="">
+              <a href="/#/admin/quan-ly-barcode">
+                  <span class="title">BARCODE</span>
+              </a>
+              <span class="icon-thumbnail "><i class="fa fa-users"></i></span>
+          </li>
+          <li class="">
+              <a href="/#/admin/quan-ly-contact">
+                  <span class="title">CONTACT</span>
+              </a>
+              <span class="icon-thumbnail "><i class="fa fa-users"></i></span>
+          </li>
+          <li class="">
+              <a href="/#/admin/quan-ly-testdrive">
+                  <span class="title">TEST DRIVE</span>
+              </a>
+              <span class="icon-thumbnail "><i class="fa fa-users"></i></span>
+          </li>
+          <li class="">
+              <a href="/#/admin/quan-ly-accessory">
+                  <span class="title">ACCESSORY</span>
+              </a>
+              <span class="icon-thumbnail "><i class="fa fa-users"></i></span>
+          </li>
+         
+          <!-- <li class="">
+              <a href="/#/admin/quan-ly-phong-ban">
+                  <span class="title">Phòng ban</span>
+              </a>
+              <span class="icon-thumbnail "><i class="fa fa-users"></i></span>
+          </li> -->
+          <li class="">
+              <a href="/#/admin/users">
+                  <span class="title">CMS USER</span>
+              </a>
+              <span class="icon-thumbnail "><i class="fa fa-users"></i></span>
+          </li>
+          <li class="">
+              <a href="/#/admin/app-users">
+                  <span class="title">ISUZUCARE USER</span>
+              </a>
+              <span class="icon-thumbnail "><i class="fa fa-users"></i></span>
+          </li>
+      </ul>
+      <div class="clearfix"></div>
+  </div>
+    <!-- END SIDEBAR MENU -->
+  </div>
+</template>

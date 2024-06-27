@@ -1,0 +1,132 @@
+<template>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <!-- <div class="panel-heading clearfix">
+          <h5 class="m-t-0 ">
+              khách hàng
+          </h5>
+        </div> -->
+        <div class="panel-body">
+          <!-- <button show.bind="checkAdmin()" click.delegate="runCreate()" class="btn btn-warning btn-sm m-b-10  m-t-5" data-toggle="modal"><i class="fa fa-file"></i> Tạo mới</button> -->
+          <div class="row">
+            <div class="col-sm-12">
+              <div lpformnum="2" class="form-filter">
+                <div class="form-group">
+                  <label>TÊN KHÁCH HÀNG</label>
+                  <span class="help">e.g. </span>
+                  <input type="text" class="form-control input-sm" value.bind="filter.where.hoTen.ilike" enter-press.call="runFilter()" placeholder="Nhập tên khách hàng">
+                </div>
+                <!-- <div class="form-group">
+                  <label>Tên viết tắt</label>
+                  <span class="help">e.g. </span>
+                  <input type="text" class="form-control input-sm" value.bind="filter.where.shortname.ilike" enter-press.call="runFilter()" placeholder="Short Name">
+                </div>
+                <div class="form-group">
+                  <label>MÃ KHÁCH HÀNG</label>
+                  <span class="help">e.g. </span>
+                  <input type="text" class="form-control input-sm" value.bind="filter.where.ma.ilike" enter-press.call="runFilter()" placeholder="Nhập mã khách hàng">
+                </div> -->
+                <div class="form-group">
+                  <label>MÃ SỐ THUẾ</label>
+                  <span class="help">e.g. </span>
+                  <input type="text" class="form-control input-sm" value.bind="filter.where.maSoThue.ilike" enter-press.call="runFilter()" placeholder="Nhập mã số thuế">
+                </div>
+                <div class="form-group">
+                  <label>Số Điện Thoại</label>
+                  <span class="help">e.g. </span>
+                  <input type="text" class="form-control input-sm" value.bind="filter.where.soDienThoai.ilike" enter-press.call="runFilter()" placeholder="Nhập mã số thuế">
+                </div>
+                <div class="form-group">
+                  <label>ĐỊA CHỈ</label>
+                  <span class="help">e.g. </span>
+                  <input type="text" class="form-control input-sm" value.bind="filter.where.diaChi.ilike" enter-press.call="runFilter()" placeholder="Nhập địa chỉ">
+                </div>
+                <!-- <div class="form-group long">
+                  <label>THEO NGÀY</label>
+                  <span class="help">e.g. </span>
+                  <div class="input-daterange input-group" daterangepickter >
+                    <input type="text" class="input-sm form-control" name="start" value.bind="startDate" datepicker>
+                    <span class="input-group-addon">đến</span>
+                    <input type="text" class="input-sm form-control" name="end" value.bind="endDate" datepicker>
+                  </div>
+                </div> -->
+                <div class="form-group">
+                  <button data-loading-text="Loading" btn-async="task.call:runFilter()" class="btn btn-primary btn-cons btn-sm m-t-25" type="submit"><i class="fa fa-search"></i> Search</button>
+                </div>
+              </div>
+              <!-- </form> -->
+            </div>
+            <div class="col-sm-12">
+              <button  click.delegate="runCreate()" class="btn btn-warning btn-sm m-b-10  m-t-5" data-toggle="modal"><i class="fa fa-plus-circle"></i> Add</button>
+              <!-- <button show.bind="checkAdmin()" click.delegate="updateLoaiKhachHang()" class="btn btn-warning btn-sm m-b-10  m-t-5" data-toggle="modal"><i class="fa fa-user-circle-o"></i> Update loại khách hàng</button> -->
+              <loader async-task.bind="asyncTask">
+                <table class="table table-hover" aurelia-table="data.bind: items; display-data.bind: $displayData; ">
+                  <thead>
+                    <tr>
+                      <th>STT</th>
+                      <th>Mã khách hàng</th>
+                      <th>Tên khách hàng</th>
+                      <th>Tên Tài khoản</th>
+                      <!-- <th style="width:50px;">Tên viết tắt</th> -->
+                      <th style="width:50px;">Mã số thuế</th>
+                      <th style="width:70px;">Số Điện Thoại</th>
+                      <th>Email</th>
+                      <th style="width:150px;">Địa Chỉ</th>
+                      <th>Chi tiết</th>
+                      <!-- <th>Hợp đồng</th> -->
+                      <!-- <th>DS Siêu thị</th> -->
+                      <th>Action </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr repeat.for="item of $displayData">
+                      <td class="v-align-middle">${$index+1}</td>
+                      <td class="v-align-middle">${item.ma}</td>
+                      <td class="v-align-middle">${item.hoTen}</td>
+                      <td class="v-align-middle">${item.tenTaiKhoan}</td>
+                      <!-- <td class="v-align-middle">${item.shortname}</td> -->
+                      <td class="v-align-middle">${item.maSoThue}</td>
+                      <td class="v-align-middle">${item.soDienThoai}</td>
+                      <td class="v-align-middle">${item.email}</td>
+                      <td class="v-align-middle">${item.diaChi}</td>
+                      <td class="v-align-middle"><button click.delegate="runViewKhachHang(item)" class="btn btn-success"><i class="fa fa-info-circle"></i> Xem</button></td>
+                      <!-- <td class="v-align-middle"><button click.delegate="runViewHopDong(item)" class="btn btn-success"><i class="fa fa-file-archive-o"></i> Xem HĐ</button></td> -->
+                      <!-- <td class="v-align-middle"><button click.delegate="runViewDSSieuThi(item)" class="btn btn-success"><i class="fa fa-file-archive-o"></i> Xem ST</button></td> -->
+                      <td class="v-align-middle">
+                        <!-- <div class="btn-group"> -->
+                          <button class="btn btn-warning btn-sm" click.delegate="runUpdate(item)"><i class="fa fa-edit"></i> Edit</button>
+                          <!-- <button type="button" class="btn btn-default btn-sm text-danger" click.delegate="runDelete(item)"><i class="fa fa-trash-o"></i> Delete</button> -->
+                        <!-- </div> -->
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="row">
+                  <div class="col-md-8">
+                    <aut-pagination filter-ref.bind="filter" changed.delegate="paginationChanged($event)" current-page.bind="currentPage" page-size.bind="pageSize"
+                      total-items.bind="itemsCount" pagination-size.bind="10">
+                    </aut-pagination>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-inline">
+                      <div class="form-group pull-right">
+                        <label for="pageSize">Page Size: </label>
+                        <select value.bind="pageSize" id="pageSize" class="form-control">
+                          <option model.bind="5">5</option>
+                          <option selected model.bind="10">10</option>
+                          <option model.bind="20">20</option>
+                          <option model.bind="50">50</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </loader>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

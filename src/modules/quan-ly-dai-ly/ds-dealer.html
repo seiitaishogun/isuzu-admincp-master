@@ -1,0 +1,109 @@
+<template>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <div lpformnum="2" class="form-filter">
+             
+                <!-- <div class="form-group">
+                  <label>TYPE</label>
+                  <input type="text" class="form-control input-sm" value.bind="filter.where.dealer_type.regexp" enter-press.call="runFilter()" placeholder="">
+                </div> -->
+                <div class="form-group">
+                  <label>DEALER</label>
+                  <input type="text" class="form-control input-sm" value.bind="filter.where.postTitle.regexp" enter-press.call="runFilter()" placeholder="">
+                </div>
+                <div class="form-group">
+                  <button data-loading-text="Loading" btn-async="task.call:runFilter()" class="btn btn-primary btn-cons btn-sm m-t-25" type="submit"><i class="fa fa-search"></i> Search</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <!-- <button  click.delegate="runCreate()" class="btn btn-primary btn-sm m-b-10  m-t-5" data-toggle="modal"><i class="fa fa-plus-circle"></i> Add </button> -->
+              <loader async-task.bind="asyncTask">
+                <table class="table table-hover" aurelia-table="data.bind: items2; display-data.bind: $displayData; ">
+                  <thead>
+                    <tr>
+                      <th>STT</th>
+                      <th>id</th>
+                      <th>Type</th>
+                      <th>Area</th>
+                      <th>Dealer</th>
+                      <!-- <th>DEALER (Tiếng Anh)</th> -->
+                      <!-- <th>Địa chỉ</th> -->
+                      <!-- <th>Địa chỉ (Tiếng Anh)</th> -->
+                      <th>Latitude</th>
+                      <th>Longtitue</th>
+                      <th>Hotline Sale</th>
+                      <th>Hotline Warranty</th>
+                      <!-- <th>Website</th> -->
+                      <!-- <th>Facebook</th> -->
+                      <!-- <th>Province/City</th> -->
+                      <th>Language</th>
+                      <th>Status</th>
+
+                      <th>Tỉnh thành</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr  repeat.for="item of $displayData">
+                      <td class="v-align-middle">${$index+1}</td>
+                      <td class="v-align-middle">${item.id}</td>
+                      <td class="v-align-middle">${item.dealer_type}</td>
+                      <td class="v-align-middle">${item.region}</td>
+                      <td class="v-align-middle">${item.postTitle}</td>
+                      <!-- <td class="v-align-middle">${item.dealer_en}</td> -->
+                      <!-- <td class="v-align-middle">${item.address_vn}</td> -->
+                      <!-- <td class="v-align-middle">${item.address_en}</td> -->
+                      <td class="v-align-middle">${item.lat}</td>
+                      <td class="v-align-middle">${item.long}</td>
+                      <td class="v-align-middle">${item.hotline_sales}</td>
+                      <td class="v-align-middle">${item.hotline_warranty}</td>
+                      <td class="v-align-middle">${item.language}</td>
+                      <td class="v-align-middle">${item.postStatus}</td>
+                      <!-- <td class="v-align-middle">${item.website}</td> -->
+                      <!-- <td class="v-align-middle">${item.facebook}</td> -->
+                      <td class="v-align-middle">${item.language === 'vn' ? item.city_vn : item.city_en}</td>
+                      <!-- <td class="v-align-middle">${item.city_en}</td> -->
+                      <td class="v-align-middle">
+                        <div class="btn-group">
+                          <button class="btn btn-warning btn-sm m-r-5" click.delegate="runUpdate(item)"><i class="fa fa-edit"></i> Edit</button>
+                          <button class="btn btn-primary btn-sm" click.delegate="resyncData(item)">ReSync</button>
+                          <!-- <button class="btn btn-danger btn-sm" click.delegate="runDelete(item)"><i class="fa fa-trash-o"></i> Delete</button> -->
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="row">
+                  <div class="col-md-8">
+                    <aut-pagination filter-ref.bind="filter" changed.delegate="paginationChanged($event)" current-page.bind="currentPage" page-size.bind="pageSize"
+                      total-items.bind="itemsCount" pagination-size.bind="10">
+                    </aut-pagination>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-inline">
+                      <div class="form-group pull-right">
+                        <label for="pageSize">Page Size: </label>
+                        <select value.bind="pageSize" id="pageSize" class="form-control">
+                          <option model.bind="5">5</option>
+                          <option selected model.bind="10">10</option>
+                          <option model.bind="20">20</option>
+                          <option model.bind="50">50</option>
+                          <option model.bind="200">200</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </loader>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

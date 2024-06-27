@@ -1,0 +1,323 @@
+<template>
+
+  <style>
+    .dropdown-item.dropdown-notification:active, .dropdown-item.dropdown-notification.active {
+        color: #1d1e1f;
+        text-decoration: none;
+        background-color: #f7f7f9;
+      }
+      
+      .dropdown-notification:hover .notification-read {
+        color: #34495E;
+      }
+      
+      .dropdown-notification-all {
+        text-align: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-style: oblique;
+        background-color: #34495E;
+        color: white;
+      }
+      
+      .dropdown-notification-all:hover {
+        background-color: #34495E;
+        color: white;
+      }
+      
+      .notifications-container {
+        max-height: 300px;
+        overflow: auto;
+      }
+      
+      .notification-dropdown-menu {
+        padding-bottom: 0;
+        min-width: 528px;
+      }
+      
+      .notification-img {
+        width: 48px;
+        display: inline-block;
+        vertical-align: top;
+      }
+      
+      .notifications-body {
+        display: inline-block;
+      }
+      
+      .notification-texte {
+        text-align: left;
+        margin: 0;
+      }
+      
+      .notification-read {
+        margin: 0;
+        height: 48px;
+        vertical-align: top;
+        line-height: 48px;
+        padding-left: 15px;
+        color: white;
+        float: right;
+      }
+      
+      .notification-date {
+        text-align: left;
+        color: #2980b9;
+        margin: 0;
+      }
+      
+      .notification-solo {
+        margin-top: 1rem;
+      }
+      
+      .notification-unread {
+        text-decoration: none;
+        background-color: #f7f7f9;
+      }
+
+      .badge-danger {
+        background-color: #ef3326;
+        color: #fff;
+        position: absolute;
+        top: -10px;
+        left: 10px;
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1000;
+      display: none;
+      float: left;
+      padding: 0.5rem 0;
+      margin: 0.125rem 0 0;
+      font-size: 1rem;
+      color: #212529;
+      text-align: left;
+      list-style: none;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      border-radius: 0.25rem;
+    }
+
+    .dropdown-item {
+      display: block;
+      width: 100%;
+      padding: 0.25rem 1.5rem;
+      clear: both;
+      font-weight: 400;
+      color: #212529;
+      text-align: inherit;
+      white-space: nowrap;
+      background-color: transparent;
+      border: 0;
+    }
+    
+    .dropdown-item:first-child {
+      border-top-left-radius: calc(0.25rem - 1px);
+      border-top-right-radius: calc(0.25rem - 1px);
+    }
+    
+    .dropdown-item:last-child {
+      border-bottom-right-radius: calc(0.25rem - 1px);
+      border-bottom-left-radius: calc(0.25rem - 1px);
+    }
+    
+    .dropdown-item:hover, .dropdown-item:focus {
+      color: #16181b;
+      text-decoration: none;
+      background-color: #f8f9fa;
+    }
+    
+    .dropdown-item.active, .dropdown-item:active {
+      color: #fff;
+      text-decoration: none;
+      background-color: #007bff;
+    }
+    
+    .dropdown-item.disabled, .dropdown-item:disabled {
+      color: #6c757d;
+      pointer-events: none;
+      background-color: transparent;
+    }
+
+    .seenNoty1 {
+      background-color: #EDF2FA; 
+    }
+    .seenNoty2 {
+      background-color: #FFFFFF; 
+    }
+
+
+
+
+
+
+    #noty-holder{    
+      width: 500px;    
+     
+      top: 20px;
+      right: 20px;
+      font-weight: bold;    
+      z-index: 1031; /* Max Z-Index in Fixed Nav Menu is 1030*/
+      text-align: center;
+      position: fixed;
+  }
+  
+  .alert{
+      margin-bottom: 2px;
+      border-radius: 5px;
+  }
+  
+
+
+  </style>
+  <require from="./nav.html"></require>
+
+
+  <!-- NAV PHONG LAB -->
+ 
+  <!-- BEGIN SIDEBAR -->
+  <router-view></router-view>
+  <!-- BEGIN SIDEBAR -->
+
+  <nav show.bind="enableAdminNav()"></nav>
+
+ 
+
+  <div id="noty-holder"></div><!-- HERE IS WHERE THE NOTY WILL APPEAR-->
+  <div class="page-container">
+    <!-- START PAGE HEADER WRAPPER -->
+    <!-- START HEADER -->
+    <div class="header ">
+      <!-- START MOBILE CONTROLS -->
+      <div class="container-fluid relative">
+        <!-- LEFT SIDE -->
+        <div class="pull-left full-height visible-sm visible-xs">
+          <!-- START ACTION BAR -->
+          <div class="header-inner">
+            <a href="#logout" class="btn-link toggle-sidebar visible-sm-inline-block visible-xs-inline-block padding-5"
+              data-toggle="sidebar">
+              <span class="icon-set menu-hambuger"></span>
+            </a>
+          </div>
+          <!-- END ACTION BAR -->
+        </div>
+  
+        <!-- RIGHT SIDE -->
+        <div class="pull-right full-height visible-sm visible-xs">
+          <!-- START ACTION BAR -->
+          <div class="header-inner">
+            <a href="#" class="btn-link visible-sm-inline-block visible-xs-inline-block" data-toggle="quickview"
+              data-toggle-element="#quickview">
+              <span class="icon-set menu-hambuger-plus"></span>
+            </a>
+          </div>
+          <!-- END ACTION BAR -->
+        </div>
+      </div>
+      <!-- END MOBILE CONTROLS -->
+      <div class=" pull-left sm-table hidden-xs hidden-sm">
+        <div class="header-inner">
+          <div class="brand inline">
+            <a href="/#/admin/man-hinh-chinh">
+              <img src="http://isuzu-vietnam.com/assets/images/logo.png" alt="logo">
+            </a>
+          </div>
+         
+       
+          <div class="search-link">
+            <h4>
+                ISUZU VIETNAM CO., LTD. v2.3.2
+              <!-- <span if.bind="isDemo" class="bold">(Prototype)</span> -->
+            </h4>
+          </div>
+          <!-- <a href="#" class="search-link" data-toggle="search"><i class="pg-search"></i>Type anywhere to <span class="bold">search</span></a>           -->
+        </div>
+      </div>
+      <!-- ICON -->
+
+
+
+
+      <!-- <div class=" pull-right">
+        <div class="header-inner">
+          <a href="#" class="btn-link icon-set menu-hambuger-plus m-l-20 sm-no-margin hidden-sm hidden-xs" data-toggle="quickview"
+            data-toggle-element="#quickview"></a>
+        </div>
+      </div> -->
+      <div class=" pull-right">
+        <!-- START User Info-->
+        <div class="visible-lg visible-md m-t-10">
+          <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
+            <span class="semi-bold">${userInfo.userName}</span> <span class="text-master"></span>
+          </div>
+          <div class="dropdown pull-right">
+            <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <span class="thumbnail-wrapper d32 circular inline m-t-5">
+                <img src.bind="userInfo.image" alt="" width="32" height="32">
+              </span>
+            </button>
+            <ul class="dropdown-menu profile-dropdown" role="menu">
+              <!-- <li><a href="javascript:void(0)" click.delegate="runSetting(userInfo.userId)"><i class="pg-settings_small"></i>
+                  Settings</a>
+              </li> -->
+              <!-- <li><a href="#"><i class="pg-outdent"></i> Feedback</a>
+              </li>
+              <li><a href="#"><i class="pg-signals"></i> Help</a>
+              </li> -->
+              <li class="bg-master-lighter">
+                <a href="javascript:void(0)" click.delegate="runLogout()" class="clearfix">
+                  <span class="pull-left">Logout</span>
+                  <span class="pull-right"><i class="pg-power"></i></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- END User Info-->
+      </div>
+    </div>
+    <!-- END HEADER -->
+
+    <!-- END PAGE HEADER WRAPPER -->
+    <!-- START PAGE CONTENT WRAPPER -->
+    <div class="page-content-wrapper">
+      <!-- START PAGE CONTENT -->
+      <div class="content">
+        <router-view></router-view>
+
+
+
+      </div>
+      <!-- END PAGE CONTENT WRAPPER -->
+    </div>
+
+    <!--<div class="page-host">
+    <router-view></router-view>
+  </div>-->
+
+
+
+    <!-- TEMPLATE NOTIFICATION -->
+    <script id="notificationTemplate" type="text/html">
+  <!-- NOTIFICATION -->
+  <a class="dropdown-item dropdown-notification" href="{{href}}">
+    <div class="notification-read">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
+    <img class="notification-img" src="https://placehold.it/48x48" alt="Icone Notification" />
+    <div class="notifications-body">
+      <p class="notification-texte">{{texte}}</p>
+      <p class="notification-date text-muted">
+        <i class="fa fa-clock-o" aria-hidden="true"></i> {{date}}
+      </p>
+    </div>
+  </a>
+</script>
+
+
+
+</template>

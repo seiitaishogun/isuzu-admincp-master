@@ -1,0 +1,115 @@
+<template>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <!-- <div class="panel-heading clearfix">
+          <h5 class="m-t-0 ">
+              khách hàng
+          </h5>
+        </div> -->
+        <div class="panel-body">
+          <!-- <button show.bind="checkAdmin()" click.delegate="runCreate()" class="btn btn-warning btn-sm m-b-10  m-t-5" data-toggle="modal"><i class="fa fa-file"></i> Tạo mới</button> -->
+          <div class="row">
+            <div class="col-sm-12">
+              <div lpformnum="2" class="form-filter">
+             
+                <!-- <div class="form-group">
+                  <label>Tên viết tắt</label>
+                  <span class="help">e.g. </span>
+                  <input type="text" class="form-control input-sm" value.bind="filter.where.shortname.ilike" enter-press.call="runFilter()" placeholder="Short Name">
+                </div>
+                <div class="form-group">
+                  <label>MÃ KHÁCH HÀNG</label>
+                  <span class="help">e.g. </span>
+                  <input type="text" class="form-control input-sm" value.bind="filter.where.ma.ilike" enter-press.call="runFilter()" placeholder="Nhập mã khách hàng">
+                </div> -->
+                <div class="form-group">
+                  <label>Mã Nhãn Hàng</label>
+                  <input type="text" class="form-control input-sm" value.bind="filter.where.maSoThue.ilike" enter-press.call="runFilter()" placeholder="">
+                </div>
+                <div class="form-group">
+                  <label>Tên Nhãn Hàng</label>
+                  <input type="text" class="form-control input-sm" value.bind="filter.where.hoTen.ilike" enter-press.call="runFilter()" placeholder="">
+                </div>
+                <div class="form-group">
+                  <label>Tên Khách Hàng</label>
+                  <input type="text" class="form-control input-sm" value.bind="filter.where.maSoThue.ilike" enter-press.call="runFilter()" placeholder="">
+                </div>
+                <!-- <div class="form-group">
+                    <label>Trạng thái</label>
+                      <select class="form-control" value.bind="hieuLucControlSelected">
+                        <option value="-1">--Chon--</option>
+                        <option value="1">Đang triển khai</option>
+                        <option value="2">Ngưng hoạt động</option>
+                      </select>
+                  </div> -->
+                <div class="form-group">
+                  <button data-loading-text="Loading" btn-async="task.call:runFilter()" class="btn btn-primary btn-cons btn-sm m-t-25" type="submit"><i class="fa fa-search"></i> Search</button>
+                </div>
+              </div>
+              <!-- </form> -->
+            </div>
+            <div class="col-sm-12">
+              <button  click.delegate="runCreate()" class="btn btn-warning btn-sm m-b-10  m-t-5" data-toggle="modal"><i class="fa fa-plus-circle"></i> Add </button>
+              <!-- <button show.bind="checkAdmin()" click.delegate="updateLoaiKhachHang()" class="btn btn-warning btn-sm m-b-10  m-t-5" data-toggle="modal"><i class="fa fa-user-circle-o"></i> Update loại khách hàng</button> -->
+              <loader async-task.bind="asyncTask">
+                <table class="table table-hover" aurelia-table="data.bind: items; display-data.bind: $displayData; ">
+                  <thead>
+                    <tr>
+                      <th>STT</th>
+                      <th>Mã Nhãn Hàng</th>
+                      <th>Tên Nhãn Hàng</th>
+                      <th>Khách Hàng</th>
+                      <th>Action </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr repeat.for="item of [
+                      {'ma':'POL','ten':'Olay','khachHang':'P&G'},
+                      {'ma':'PGL','ten':'Gillette','khachHang':'P&G'},
+                      {'ma':'POB','ten':'Oral-B','khachHang':'P&G'},
+                      {'ma':'RAN','ten':'Acnes','khachHang':'ROHTO'},
+                      {'ma':'RSL','ten':'Sunlay','khachHang':'ROHTO'},
+                      {'ma':'RHL','ten':'Hadalabo','khachHang':'ROHTO'}
+                    ]">
+                      <td class="v-align-middle">${$index+1}</td>
+                      <td class="v-align-middle">${item.ma}</td>
+                      <td class="v-align-middle">${item.ten}</td>
+                      <td class="v-align-middle">${item.khachHang}</td>
+                      <td class="v-align-middle">
+                        <!-- <div class="btn-group"> -->
+                          <button class="btn btn-warning btn-sm" click.delegate="runUpdate(item)"><i class="fa fa-edit"></i> Edit</button>
+                          <!-- <button type="button" class="btn btn-default btn-sm text-danger" click.delegate="runDelete(item)"><i class="fa fa-trash-o"></i> Delete</button> -->
+                        <!-- </div> -->
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="row">
+                  <div class="col-md-8">
+                    <aut-pagination filter-ref.bind="filter" changed.delegate="paginationChanged($event)" current-page.bind="currentPage" page-size.bind="pageSize"
+                      total-items.bind="itemsCount" pagination-size.bind="10">
+                    </aut-pagination>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-inline">
+                      <div class="form-group pull-right">
+                        <label for="pageSize">Page Size: </label>
+                        <select value.bind="pageSize" id="pageSize" class="form-control">
+                          <option model.bind="5">5</option>
+                          <option selected model.bind="10">10</option>
+                          <option model.bind="20">20</option>
+                          <option model.bind="50">50</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </loader>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
